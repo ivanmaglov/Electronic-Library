@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Search Results</h1>
+<ul>
+  {% for book in book_list %}
+    <li>
+     <a href="{% url "book_detail_all" book.url_address %}"> {{ book.title }}</a>
+    </li>
+    {% empty %}
+  <p>No results found. Please try a different keyword.</p>
+  {% endfor %}
+</ul>
+
+{% endblock %}

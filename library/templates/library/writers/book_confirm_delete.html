@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="alert alert-info" method="post">{% csrf_token %}
+    <p class="alert alert-danger">Are you sure you want to delete your book: "{{ object }}"?</p>
+    <input class="btn btn-danger" type="submit" value="Confirm">
+     <a class="btn btn-info" href="{% url "writers:book_list" %}">Book Management Dashboard</a>
+</form>
+
+{% endblock %}

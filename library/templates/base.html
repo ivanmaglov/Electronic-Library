@@ -1,0 +1,98 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+    <title>Electronic library</title>
+</head>
+<body>
+
+  <div id="header">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Books</a>
+    <button class="navbar-toggler" aria-expanded="false" aria-controls="navbarColor02" aria-label="Toggle navigation" type="button" data-target="#navbarColor02" data-toggle="collapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+
+   <li class="nav-item active">
+         <a class="nav-link" href="{% url "all_books" %}">All Books <span class="sr-only">(current)</span></a>
+        </li>
+   <li class="nav-item active">
+         <a class="nav-link" href="{% url "all_quotes" %}">All Quotes <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item">
+           {% if request.user.is_authenticated %}
+          <a class="nav-link" href="{% url "logout" %}">Sign out</a>
+           {% else %}
+           <a class="nav-link " href="{% url "login" %}">Sign in</a>
+          <li> <a class="nav-link " href="{% url "signup" %}">Sign up</a></li>
+           {% endif %}
+        </li>
+
+        <li class="nav-item">
+           {%  if request.user.is_writer %}
+          <a class="nav-link" href="{% url "writers:add_book" %}">Add a new book</a>
+        {% endif %}
+        </li>
+             <li class="nav-item">
+           {%  if request.user.is_reader %}
+          <a class="nav-link" href="{% url "readers:add_quote" %}">Add a new Quote from book</a>
+        {% endif %}
+        </li>
+               <li class="nav-item">
+           {%  if request.user.is_reader %}
+          <a class="nav-link" href="{% url "readers:quote_list" %}">Quote Dashboard</a>
+        {% endif %}
+        </li>
+            <li class="nav-item">
+           {%  if request.user.is_reader %}
+                         <a class="nav-link" href="{% url "readers:genres"  user.id %}">My favorite book genres</a>
+        {% endif %}
+        </li>
+          <li class="nav-item">
+           {%  if request.user.is_writer %}
+          <a class="nav-link" href="{% url "writers:book_list" %}">Book Management Dashboard</a>
+        {% endif %}
+        </li>
+      </ul>
+
+        <form  id="searchform" action="{% url 'book_search_list_view' %}" method="get" accept-charset="utf-8" class="form-inline">
+        <input class="form-control mr-sm-2"  name="q" type="text" aria-label="Search" type="search" placeholder="Search">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+      </form>
+
+    </div>
+  </nav>
+  </div>
+
+
+    {% block content %}
+    {% endblock %}
+
+  <br><br><br>
+  <div class="text-center" id="footer">Electronic Library
+                  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function() {
+      {% block domready %}
+      {% endblock %}
+    });
+  </script>
+</body>
+
+</html>

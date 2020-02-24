@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="alert alert-primary">Your Quotes</h2>
+
+<div class="card bg-light mb-3" style="max-width: 30rem;">
+    {% for quote in all_quotes_by_user %}
+ <div class="card-header">quote from {{ quote.from_writer }}</div>
+  <div class="card-body">
+    <h5 class="card-title"> </h5>
+    <p class="card-text"></p>
+       <a class="btn btn-info" href="{% url "readers:quote_detail" quote.url_address %}"> View</a>
+          <a class="btn btn-info" href="{% url "readers:quote_update" quote.id %}"> Edit</a>
+      <a class="btn btn-danger" href="{% url "readers:quote_delete" quote.id %}"> Delete</a>
+  </div>
+    {% empty %}
+ <li>You haven't add any quotes.</li>
+     <a class="btn-info" href="{% url "readers:add_quote" %}">Add a new quotes</a>
+    {% endfor %}
+</div>
+{% endblock %}

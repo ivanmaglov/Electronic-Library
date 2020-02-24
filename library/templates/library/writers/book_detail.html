@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div  class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-5 center text-center">Book title: {{ book.title }} <br>Book writer: {{ book.owner }}</h1>
+      <img class="img rounded mx-auto d-block" src="{{ book.picture.url }}" width="450" height="290"  />
+ <div>
+
+     </div>
+    <p class="lead">Overview: {{ book.Overview| safe }}</p>
+      <p class="lead">Book genre: {{ book.genre }}</p>
+        <p class="lead"></p>
+
+              {% if request.user.is_authenticated %}
+        <a  target="_blank" href="{{ book.download.url }}"/><button type="button" class="btn btn-primary btn-block" >Download  </button></a>
+{% else  %}
+                      <a class="btn btn-primary btn-block " href="{% url "login" %}">Please login to download books</a>
+                      {% endif %}
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="alert alert-primary">Your Books</h2>
+
+<div class="card bg-light mb-3" style="max-width: 30rem;">
+    {% for book in all_books_by_user %}
+ <div class="card-header">Book title: {{ book.title }}</div>
+  <div class="card-body">
+    <h5 class="card-title">Book genre: {{ book.genre }}</h5>
+    <p class="card-text"></p>
+       <a class="btn btn-info" href="{% url "writers:book_detail" book.url_address %} "> View</a>
+          <a class="btn btn-info" href="{% url "writers:book_update" book.id %} "> Edit</a>
+      <a class="btn btn-danger" href="{% url "writers:book_delete" book.id %} "> Delete</a>
+  </div>
+    {% empty %}
+ <li>You haven't add any books.</li>
+     <a class="btn-info" href="{% url "writers:add_book" %}">Add a new book</a>
+    {% endfor %}
+</div>
+{% endblock %}

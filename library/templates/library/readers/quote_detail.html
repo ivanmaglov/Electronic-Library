@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+.blockquote-custom {
+  position: relative;
+  font-size: 1.1rem;
+}
+
+body {
+  background: #eff0eb;
+  background-image: url('https://i.postimg.cc/MTbfnkj6/bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+</style>
+ <blockquote class="blockquote blockquote-custom bg-white p-3 shadow rounded">
+                    <div class="blockquote-custom-icon bg-info shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+                    <p class="mb-0 mt-2 font-italic">{{ quote.Overview }} <a href="#" class="text-info">@shared by user {{ quote.owner }}</a>."</p>
+                    <footer class="blockquote-footer pt-4 mt-4 border-top">Writer - {{ quote.from_writer }}
+                        <cite title="Source Title">Book Title - {{ quote.from_book }} </cite>
+                    </footer>
+                </blockquote>
+{% endblock %}

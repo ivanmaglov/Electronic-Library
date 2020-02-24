@@ -1,0 +1,21 @@
+     #footer {
+            position: fixed;
+            padding: 10px 10px 0px 10px;
+            bottom: 0;
+            width: 100%;
+            /* Height of the footer*/
+            height: 40px;
+            background: #007bff ;
+        }
+
+.blockquote-custom {
+  position: relative;
+  font-size: 1.1rem;
+}
+
+body {
+  background: #eff0eb;
+  background-image: url('img/bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}

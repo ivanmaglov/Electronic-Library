@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+  <h2 class="mb-3">Add a quote</h2>
+  <div class="row">
+    <div class="col-md-6 col-sm-8 col-12">
+      <form class="form-horizontal form-group" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save</button>
+
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html'   %}
+{% block content %}
+        <div class="album py-5 bg-light" id="project">
+        <div class="container">
+    <div class="row">
+        {% for book in books %}
+        <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="{{ book.picture.url }}" height="250" />
+                  <div class="card-body">
+               <p class="card-text text-center">{{ book.title}}</p>
+                 <p class="card-text text-left">Writer: {{ book.owner }}</p>
+                  <p  class="card-text text-left">Book Genre: {{ book.genre }}</p>
+                     <button onclick="window.location='{% url "book_detail_all" book.url_address %}';" style="cursor:pointer;"
+                             type="button" class="btn btn-info btn-block" >Read more:  </button>
+                </br>
+   {% if request.user.is_authenticated %}
+        <a  target="_blank" href="{{ book.download.url }}"/><button type="button" class="btn btn-primary btn-block" >Download  </button></a>
+{% else  %}
+                      <a class="btn btn-primary btn-block " href="{% url "login" %}">Please login to download books</a>
+                      {% endif %}
+                      </div>
+                   </div>
+             </div>
+        {% endfor %}
+                 </div>
+             </div>
+         </div>
+
+          <div class="pagination container">
+    <span class="step-links">
+        {% if books.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ books.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ books.number }} of {{ books.paginator.num_pages }}.
+        </span>
+        {% if books.has_next %}
+            <a href="?page={{ books.next_page_number }}">next</a>
+            <a href="?page={{ books.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

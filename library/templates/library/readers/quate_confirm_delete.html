@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form class="alert alert-info" method="post">{% csrf_token %}
+    <p class="alert alert-danger">Are you sure you want to delete your quote: "{{ object }}"?</p>
+    <input class="btn btn-danger" type="submit" value="Confirm">
+     <a class="btn btn-info" href="{% url "readers:quote_list" %}">Quote Management Dashboard</a>
+</form>
+
+{% endblock %}
